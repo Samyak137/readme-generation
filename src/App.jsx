@@ -6,7 +6,6 @@ import {
   faXTwitter,
   faInstagram,
 } from "@fortawesome/free-brands-svg-icons";
-import "./App.css";
 
 function App() {
   const [name, setName] = useState("");
@@ -25,6 +24,12 @@ function App() {
   const [linkedin, setLinkedin] = useState("");
   const [x, setX] = useState("");
   const [insta, setInsta] = useState("");
+  const [githubUsername, setGithubUsername] = useState("");
+  const [feature1, setfeature1] = useState(false);
+  const [feature2, setfeature2] = useState(false);
+  const [feature3, setfeature3] = useState(false);
+  const [feature4, setfeature4] = useState(false);
+  const [feature5, setfeature5] = useState(false);
   const [content, setContent] = useState(
     "This is the content that will be copied to the clipboard."
   );
@@ -80,9 +85,9 @@ function App() {
 
   return (
     <>
-      <div className="container h-full w-[95vw] items-start bg-gradient-to-r from-gray-700 via-gray-900 to-black mt-5 mb-5 mx-auto flex justify-evenly rounded-xl break-words">
+      <div className="container h-full w-[95vw] items-start  bg-gradient-to-r from-[#2b5876] to-[#4e4376] mt-5 mb-5 mx-auto flex justify-evenly rounded-xl break-words">
         <div className="left-container w-[45%] py-[100px] flex flex-col space-y-4">
-          <div className="left-container1  bg-white h-[53%] p-[20px] rounded-lg">
+          <div className="left-container1 bg-white h-[53%] p-[20px] rounded-lg">
             <h2 className="text-3xl font-bold underline decoration-purple-500 mb-6">
               Header
             </h2>
@@ -280,6 +285,115 @@ function App() {
               </div>
             </div>
           </div>
+          <div className="left-container4  bg-white h-[53%] p-[20px] rounded-lg">
+            <h2 className="text-3xl font-bold underline decoration-purple-500 mb-6">
+              Add on Features
+            </h2>
+            <div className="github-username flex justify-between my-[40px]">
+              <div className="icon ">
+                <FontAwesomeIcon icon={faGithub} className="h-[3em]" />
+              </div>
+              <div>
+                <input
+                  placeholder="GitHub Username"
+                  value={githubUsername}
+                  onChange={(e) => {
+                    setGithubUsername(e.target.value);
+                  }}
+                  className="username border border-solid border-gray-500 rounded-lg p-2 h-[3.25rem] w-[34rem]"
+                />
+              </div>
+            </div>
+            <div className="checkbox text-2xl font-bold m-[15px] label-with-dot">
+              <label htmlFor="profileViews" className="ml-5 ">
+                Add Profile Views
+              </label>
+              <input
+                type="checkbox"
+                onClick={(e) => {
+                  setfeature1(!feature1);
+                }}
+                id="profileViews"
+                className="ml-5 custom-checkbox"
+              />
+            </div>
+            <div className="checkbox text-2xl font-bold m-[15px] label-with-dot">
+              <label htmlFor="profileViews" className="ml-5 ">
+                Add Trophies Section
+              </label>
+              <input
+                type="checkbox"
+                id="profileViews"
+                checked={feature2 === true ? true : false}
+                onClick={(e) => {
+                  setfeature2(!feature2);
+                }}
+                className="ml-5 custom-checkbox"
+              />
+            </div>
+            <div className="checkbox text-2xl font-bold m-[15px] label-with-dot">
+              <label htmlFor="profileViews" className="ml-5 ">
+                Add Streaks Section
+              </label>
+              <input
+                type="checkbox"
+                id="profileViews"
+                onClick={(e) => {
+                  setfeature3(!feature3);
+                }}
+                className="ml-5 custom-checkbox"
+              />
+            </div>
+            <div className="checkbox text-2xl font-bold m-[15px] label-with-dot">
+              <label htmlFor="profileViews" className="ml-5 ">
+                Add Top Language Usage
+              </label>
+              <input
+                type="checkbox"
+                id="profileViews"
+                onClick={(e) => {
+                  setfeature4(!feature4);
+                }}
+                className="ml-5 custom-checkbox"
+              />
+            </div>
+            <div className="checkbox text-2xl font-bold m-[15px] label-with-dot">
+              <label htmlFor="profileViews" className="ml-5 ">
+                Add Readme State
+              </label>
+              <input
+                type="checkbox"
+                id="profileViews"
+                onClick={(e) => {
+                  setfeature5(!feature5);
+                }}
+                className="ml-5 custom-checkbox"
+              />
+            </div>
+
+            <style jsx>{`
+              .label-with-dot {
+                display: flex;
+                align-items: center; /* Vertically centers the dot and the text */
+              }
+
+              .label-with-dot::before {
+                content: "";
+                display: inline-block;
+                width: 7px;
+                height: 7px;
+                background-color: #000; /* Dark dot color */
+                border-radius: 50%;
+                margin-right: 4px; /* Space between dot and text */
+              }
+            `}</style>
+            <style jsx>{`
+              .custom-checkbox {
+                width: 17px;
+                height: 17px;
+              }
+            `}</style>
+          </div>
         </div>
 
         <div className="right-container mt-[100px] bg-white h-auto min-h-[400px] w-[45%] p-[20px] rounded-lg break-words">
@@ -435,8 +549,74 @@ function App() {
               </div>
             )}
           </div>
+          <div className=" flex flex-col items-center justify-center mt-[50px] ">
+            {feature1 === false &&
+            feature2 === false &&
+            feature3 === false &&
+            feature4 === false &&
+            feature4 === false ? null : (
+              <h2 className="text-black text-3xl font-bold mt-[30px]">
+                Github Status
+              </h2>
+            )}
+
+            {feature1 === false ? (
+              ""
+            ) : (
+              <p className="my-[30px]">
+                {" "}
+                <img
+                  src={`https://komarev.com/ghpvc/?username=${githubUsername}&label=Profile%20views&color=0e75b6&style=flat`}
+                  alt={githubUsername}
+                />{" "}
+              </p>
+            )}
+            {feature2 === false ? (
+              ""
+            ) : (
+              <p className="my-[30px]">
+                {" "}
+                <a href="https://github.com/ryo-ma/github-profile-trophy">
+                  <img
+                    src={`https://github-profile-trophy.vercel.app/?username=${githubUsername}`}
+                    alt={githubUsername}
+                  />
+                </a>{" "}
+              </p>
+            )}
+            {feature3 === false ? (
+              " "
+            ) : (
+              <p className="my-[30px]">
+                <img
+                  src={`https://github-readme-streak-stats.herokuapp.com/?user=${githubUsername}&`}
+                  alt={githubUsername}
+                />
+              </p>
+            )}
+            {feature4 === false ? (
+              " "
+            ) : (
+              <p className="my-[30px]">
+                <img
+                  src={`https://github-readme-stats.vercel.app/api/top-langs?username=${githubUsername}&show_icons=true&locale=en&layout=compact`}
+                />
+              </p>
+            )}
+            {feature5 === false ? (
+              " "
+            ) : (
+              <p className="my-[30px]">
+                <img
+                  src={`https://github-readme-stats.vercel.app/api?username=${githubUsername}&show_icons=true&locale=en`}
+                />
+              </p>
+            )}
+          </div>
+          <br />
         </div>
       </div>
+
       <div class="container min-h-[200px] w-[90vw] items-start bg-customBackground mt-5 mb-5 mx-auto relative h-auto rounded-lg">
         <div>
           <h2 className="text-3xl font-bold underline decoration-purple-500 mb-6 py-2 px-4">
@@ -450,7 +630,7 @@ function App() {
           </button>
         </div>
         <div className="code bg-white min-h-[80px] h-auto w-[85vw] mx-[40px] p-[20px]">
-          <p>{`<h1 align="center"> Hello! Myself, ${name} </h1>`}</p>
+          <p>{`<h1 align="center"> Hello! Myself,  </h1>`}</p>
           <p> {`<h3 align="center"> ${interest} </h3>`} </p>
           <p>{`<img
               src="${
@@ -463,7 +643,79 @@ function App() {
           <p> {`<p align="center"> ${desc} </p>`} </p>
           <p> {`<h3 align="center"> ${college} </h3>`} </p>
           <p> {`<h3 align="center"> Skills: ${skills} </h3>`} </p>
-          <p></p>
+          <p>
+            {" "}
+            {task1 === ""
+              ? null
+              : `<h3> 🚧 I’m currently working on ${task1} </h3>`}{" "}
+          </p>
+          <p>
+            {" "}
+            {task2 === ""
+              ? null
+              : `<h3> 📑 I'm Currently Learning... ${task2} </h3>`}{" "}
+          </p>
+          <p>
+            {" "}
+            {task3 === ""
+              ? null
+              : `<h3> 🏅 My Favourite Hobby ${task3} </h3>`}{" "}
+          </p>
+          <p>
+            {" "}
+            {task4 === ""
+              ? null
+              : `<h3> 🗡️ Look At My this Project ${task4} </h3>`}{" "}
+          </p>
+          <p>
+            {" "}
+            {task5 === ""
+              ? null
+              : `<h3> 🏴󠁧󠁢󠁷󠁬󠁳󠁿 My Personal Website ${task5} </h3>`}{" "}
+          </p>
+          <p> {task6 === "" ? null : `<h3> 📣 Ask Me About ${task6} </h3>`}</p>
+          <p>
+            {" "}
+            {github === "" && linkedin === "" && x === "" && insta === ""
+              ? ""
+              : `<h2 className="" > Connect With Me </h2>`}{" "}
+          </p>
+          <p>
+            {feature1 === false
+              ? ""
+              : `<a href="https://github.com/ryo-ma/github-profile-trophy">
+                  <img
+                    src="https://github-profile-trophy.vercel.app/?username=${githubUsername}"
+                  />
+                </a>`}
+          </p>
+
+          {feature2 === false
+            ? ""
+            : `<a href="https://github.com/ryo-ma/github-profile-trophy">
+                <img
+                  src="https://github-profile-trophy.vercel.app/?username=${githubUsername}"
+                />
+              </a>`}
+          <br />
+          {feature3 === false
+            ? " "
+            : `<img src="https://github-readme-streak-stats.herokuapp.com/?user=${githubUsername}" />`}
+          {feature4 === false
+            ? " "
+            : `<p>
+              <img
+                src="https://github-readme-stats.vercel.app/api/top-langs?username=${githubUsername}&show_icons=true&locale=en&layout=compact"
+              />
+            </p>`}
+          <br />
+          {feature5 === false
+            ? " "
+            : `<p className="my-[30px]">
+              <img
+                src="https://github-readme-stats.vercel.app/api?username=${githubUsername}&show_icons=true&locale=en"
+              />
+            </p>`}
         </div>
       </div>
     </>
