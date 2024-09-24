@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
+// import { CopyToClipboard } from "react-copy-to-clipboard";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faGithub,
@@ -30,9 +31,15 @@ function App() {
   const [feature3, setfeature3] = useState(false);
   const [feature4, setfeature4] = useState(false);
   const [feature5, setfeature5] = useState(false);
-  const [content, setContent] = useState(
-    "This is the content that will be copied to the clipboard."
-  );
+  const textDivRef = useRef(null);
+
+  const handleCopy = () => {
+    const textToCopy = textDivRef.current.innerText;
+    navigator.clipboard
+      .writeText(textToCopy)
+      .then(() => alert("Copied to clipboard!"))
+      .catch(() => alert("Failed to copy!"));
+  };
 
   const changeName = (e) => {
     setName(e.target.value);
@@ -56,31 +63,6 @@ function App() {
 
   const skillsName = (s) => {
     setSkills(s.target.value);
-  };
-
-  // Function to copy content to clipboard
-  const copyToClipboard = () => {
-    const content = `
-      <h1 align="center"> Hello! Myself, </h1>
-
-<h3 align="center"> </h3>
-
-<img src="https://raw.githubusercontent.com/halfrost/halfrost/master/icons/header_.png" alt="" />
-
-<p align="center"> </p>
-
-<h3 align="center"> </h3>
-
-<h3 align="center"> Skills: </h3>
-    `;
-    navigator.clipboard
-      .writeText(content) // Copy content from state
-      .then(() => {
-        alert("Copied to clipboard!");
-      })
-      .catch((err) => {
-        console.error("Failed to copy: ", err);
-      });
   };
 
   return (
@@ -113,7 +95,7 @@ function App() {
             <h3 className="block text-gray-700 font-bold mt-5">Banner</h3>
             <input
               className="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-indigo-400 focus:outline-none"
-              placeholder="https://raw.githubusercontent.com/halfrost/halfrost/master/icons/header_.png"
+              placeholder="https://arturssmirnovs.github.io/github-profile-readme-generator/images/banner.png"
               value={banner}
               onChange={changeBanner}
             />
@@ -402,7 +384,7 @@ function App() {
           </h2>
 
           {name === "" ? (
-            <p className=" mt-[15px] text-slate-700 text-3xl text-center font-bold ">
+            <p className=" mt-[15px] text-slate-900 text-3xl text-center font-bold ">
               Hello! Myself, Samyak Jain
             </p>
           ) : (
@@ -418,7 +400,7 @@ function App() {
               Enthusiastic Learner 📖 | Web Developer 💻
             </p>
           ) : (
-            <p className=" mt-[15px] text-slate-700 text-xl font-bold">
+            <p className=" mt-[15px] text-slate-700 text-center text-xl font-bold">
               I am a interested in{" "}
               <span className="mt-[15px] text-slate-950 text-2xl font-bold ">
                 {interest}
@@ -428,9 +410,9 @@ function App() {
 
           <span className="block p-4 rounded-lg">
             {banner === "" ? (
-              <a href="https://raw.githubusercontent.com/halfrost/halfrost/master/icons/header_.png">
+              <a href="https://arturssmirnovs.github.io/github-profile-readme-generator/images/banner.png">
                 <img
-                  src="https://raw.githubusercontent.com/halfrost/halfrost/master/icons/header_.png"
+                  src="https://arturssmirnovs.github.io/github-profile-readme-generator/images/banner.png"
                   alt="default banner"
                 />
               </a>
@@ -446,22 +428,24 @@ function App() {
               eum sapiente modi laboriosam option.
             </center>
           ) : (
-            <p className=" mt-[25px] text-slate-750 text-xl">{desc}</p>
+            <p className=" mt-[25px] text-center text-slate-750 text-xl">
+              {desc}
+            </p>
           )}
           <div className="m-[30px]">
             {college === "" ? (
-              <span className="mt-[10px] font-bold flex justify-center">
+              <span className="mt-[10px] font-bold ">
                 Gyan Ganga Institute Of Technology And Sciences
               </span>
             ) : (
-              <p className=" mt-[15px] text-slate-700 text-xl font-bold">
+              <p className=" mt-[10px] text-slate-700 text-xl font-bold">
                 {college}
               </p>
             )}
             <br />
             <br />
             {skills === "" ? (
-              <span className="mt-[5px] font-bold flex justify-center">
+              <span className="mt-[5px] font-bold ">
                 Skills: HTML, CSS, JS, C++, C, React ,Firebase, DSA
               </span>
             ) : (
@@ -617,22 +601,25 @@ function App() {
         </div>
       </div>
 
-      <div class="container min-h-[200px] w-[90vw] items-start bg-customBackground mt-5 mb-5 mx-auto relative h-auto rounded-lg">
-        <div>
+      <div
+        ref={textDivRef}
+        className="container min-h-[200px] w-[90vw] flex justify-center items-center bg-customBackground mt-5 mb-5 mx-auto relative h-auto rounded-lg p-[15px]"
+      >
+        <div className="w-full relative">
           <h2 className="text-3xl font-bold underline decoration-purple-500 mb-6 py-2 px-4">
             Code
           </h2>
+
           <button
-            class="absolute top-0 right-0 m-4 bg-blue-500 text-white py-2 px-4 rounded"
-            onClick={copyToClipboard}
+            onClick={handleCopy}
+            className="absolute top-0 right-0 m-4 bg-blue-500 text-white py-2 px-4 rounded"
           >
             Copy Code!
           </button>
-        </div>
-        <div className="code bg-white min-h-[80px] h-auto w-[85vw] mx-[40px] p-[20px]">
-          <p>{`<h1 align="center"> Hello! Myself,  </h1>`}</p>
-          <p> {`<h3 align="center"> ${interest} </h3>`} </p>
-          <p>{`<img
+          <div className="code bg-black text-white min-h-[80px] h-auto w-[85vw] mx-auto p-[20px]">
+            <p>{`<h1 align="center"> Hello! Myself,  </h1>`}</p>
+            <p> {`<h3 align="center"> ${interest} </h3>`} </p>
+            <p>{`<img
               src="${
                 banner === ""
                   ? "https://raw.githubusercontent.com/halfrost/halfrost/master/icons/header_.png"
@@ -640,82 +627,86 @@ function App() {
               }"
               alt=""
             />`}</p>
-          <p> {`<p align="center"> ${desc} </p>`} </p>
-          <p> {`<h3 align="center"> ${college} </h3>`} </p>
-          <p> {`<h3 align="center"> Skills: ${skills} </h3>`} </p>
-          <p>
-            {" "}
-            {task1 === ""
-              ? null
-              : `<h3> 🚧 I’m currently working on ${task1} </h3>`}{" "}
-          </p>
-          <p>
-            {" "}
-            {task2 === ""
-              ? null
-              : `<h3> 📑 I'm Currently Learning... ${task2} </h3>`}{" "}
-          </p>
-          <p>
-            {" "}
-            {task3 === ""
-              ? null
-              : `<h3> 🏅 My Favourite Hobby ${task3} </h3>`}{" "}
-          </p>
-          <p>
-            {" "}
-            {task4 === ""
-              ? null
-              : `<h3> 🗡️ Look At My this Project ${task4} </h3>`}{" "}
-          </p>
-          <p>
-            {" "}
-            {task5 === ""
-              ? null
-              : `<h3> 🏴󠁧󠁢󠁷󠁬󠁳󠁿 My Personal Website ${task5} </h3>`}{" "}
-          </p>
-          <p> {task6 === "" ? null : `<h3> 📣 Ask Me About ${task6} </h3>`}</p>
-          <p>
-            {" "}
-            {github === "" && linkedin === "" && x === "" && insta === ""
-              ? ""
-              : `<h2 className="" > Connect With Me </h2>`}{" "}
-          </p>
-          <p>
-            {feature1 === false
-              ? ""
-              : `<a href="https://github.com/ryo-ma/github-profile-trophy">
+            <p> {`<p align="center"> ${desc} </p>`} </p>
+            <p> {`<h3 align="center"> ${college} </h3>`} </p>
+            <p> {`<h3 align="center"> Skills: ${skills} </h3>`} </p>
+            <p>
+              {" "}
+              {task1 === ""
+                ? null
+                : `<h3> 🚧 I’m currently working on ${task1} </h3>`}{" "}
+            </p>
+            <p>
+              {" "}
+              {task2 === ""
+                ? null
+                : `<h3> 📑 I'm Currently Learning... ${task2} </h3>`}{" "}
+            </p>
+            <p>
+              {" "}
+              {task3 === ""
+                ? null
+                : `<h3> 🏅 My Favourite Hobby ${task3} </h3>`}{" "}
+            </p>
+            <p>
+              {" "}
+              {task4 === ""
+                ? null
+                : `<h3> 🗡️ Look At My this Project ${task4} </h3>`}{" "}
+            </p>
+            <p>
+              {" "}
+              {task5 === ""
+                ? null
+                : `<h3> 🏴 My Personal Website ${task5} </h3>`}{" "}
+            </p>
+            <p>
+              {" "}
+              {task6 === "" ? null : `<h3> 📣 Ask Me About ${task6} </h3>`}
+            </p>
+            <p>
+              {" "}
+              {github === "" && linkedin === "" && x === "" && insta === ""
+                ? ""
+                : `<h2 className="" > Connect With Me </h2>`}{" "}
+            </p>
+            <p>
+              {feature1 === false
+                ? ""
+                : `<a href="https://github.com/ryo-ma/github-profile-trophy">
                   <img
                     src="https://github-profile-trophy.vercel.app/?username=${githubUsername}"
                   />
                 </a>`}
-          </p>
+            </p>
 
-          {feature2 === false
-            ? ""
-            : `<a href="https://github.com/ryo-ma/github-profile-trophy">
-                <img
-                  src="https://github-profile-trophy.vercel.app/?username=${githubUsername}"
-                />
-              </a>`}
-          <br />
-          {feature3 === false
-            ? " "
-            : `<img src="https://github-readme-streak-stats.herokuapp.com/?user=${githubUsername}" />`}
-          {feature4 === false
-            ? " "
-            : `<p>
-              <img
-                src="https://github-readme-stats.vercel.app/api/top-langs?username=${githubUsername}&show_icons=true&locale=en&layout=compact"
-              />
-            </p>`}
-          <br />
-          {feature5 === false
-            ? " "
-            : `<p className="my-[30px]">
-              <img
-                src="https://github-readme-stats.vercel.app/api?username=${githubUsername}&show_icons=true&locale=en"
-              />
-            </p>`}
+            {feature2 === false
+              ? ""
+              : `<a href="https://github.com/ryo-ma/github-profile-trophy">
+            <img
+              src="https://github-profile-trophy.vercel.app/?username=${githubUsername}"
+            />
+          </a>`}
+            <br />
+            {feature3 === false
+              ? " "
+              : `<img src="https://github-readme-streak-stats.herokuapp.com/?user=${githubUsername}" />`}
+            {feature4 === false
+              ? " "
+              : `<p>
+            <img
+              src="https://github-readme-stats.vercel.app/api/top-langs?username=${githubUsername}&show_icons=true&locale=en&layout=compact"
+            />
+          </p>`}
+            <br />
+            {feature5 === false
+              ? " "
+              : `<p className="my-[30px]">
+            <img
+              src="https://github-readme-stats.vercel.app/api?username=${githubUsername}&show_icons=true&locale=en"
+            />
+          </p>`}
+          </div>
         </div>
       </div>
     </>
