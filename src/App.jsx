@@ -612,7 +612,7 @@ function App() {
 
           <button
             onClick={handleCopy}
-            className="absolute top-0 right-0 m-4 bg-blue-500 text-white py-2 px-4 rounded"
+            className="absolute top-0 right-0 m-4 bg-blue-500 text-white py-2 px-4 border-2 border-blue-900 rounded hover:bg-blue-700 transition-colors duration-300"
           >
             Copy Code!
           </button>
