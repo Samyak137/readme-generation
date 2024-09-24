@@ -622,7 +622,7 @@ function App() {
             ref={textDivRef}
             className="code bg-black text-white min-h-[80px] h-auto mx-auto p-[20px] w-full rounded-lg"
           >
-            <p>{`<h1 align="center"> Hello! Myself,  </h1>`}</p>
+            <p>{`<h1 align="center"> Hello! Myself, ${name}  </h1>`}</p>
             <p> {`<h3 align="center"> ${interest} </h3>`} </p>
             <p>{`<img 
               src="${
