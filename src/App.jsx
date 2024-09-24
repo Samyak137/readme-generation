@@ -67,6 +67,12 @@ function App() {
 
   return (
     <>
+      <div className="flex justify-center items-center ">
+        <div className="text-5xl font-normal h-[80px] w-[50%] text-center my-[70px] bg-[#163c76] p-8 rounded-lg flex justify-center items-center shadow-2xl text-[#b0bc92] ">
+          <h1>GitHub Readme Generator</h1>
+        </div>
+      </div>
+
       <div className="container h-full w-[95vw] items-start  bg-gradient-to-r from-[#2b5876] to-[#4e4376] mt-5 mb-5 mx-auto flex justify-evenly rounded-xl break-words">
         <div className="left-container w-[45%] py-[100px] flex flex-col space-y-4">
           <div className="left-container1 bg-white h-[53%] p-[20px] rounded-lg">
@@ -390,7 +396,7 @@ function App() {
           ) : (
             <p className=" mt-[15px] text-slate-700 text-2xl text-center font-bold ">
               Hello! Myself,{" "}
-              <span className="mt-[15px] text-slate-950 text-3xl font-bold underline">
+              <span className="mt-[15px] text-slate-950 text-3xl font-bold">
                 {name}
               </span>
             </p>
@@ -551,7 +557,6 @@ function App() {
                 {" "}
                 <img
                   src={`https://komarev.com/ghpvc/?username=${githubUsername}&label=Profile%20views&color=0e75b6&style=flat`}
-                  alt={githubUsername}
                 />{" "}
               </p>
             )}
@@ -601,10 +606,7 @@ function App() {
         </div>
       </div>
 
-      <div
-        ref={textDivRef}
-        className="container min-h-[200px] w-[90vw] flex justify-center items-center bg-customBackground mt-5 mb-5 mx-auto relative h-auto rounded-lg p-[15px]"
-      >
+      <div className="container min-h-[200px] w-full flex justify-center items-center bg-customBackground mt-5 mb-5 mx-auto relative h-auto rounded-lg p-[15px]">
         <div className="w-full relative">
           <h2 className="text-3xl font-bold underline decoration-purple-500 mb-6 py-2 px-4">
             Code
@@ -612,20 +614,24 @@ function App() {
 
           <button
             onClick={handleCopy}
-            className="absolute top-0 right-0 m-4 bg-blue-500 text-white py-2 px-4 border-2 border-blue-900 rounded hover:bg-blue-700 transition-colors duration-300"
+            className="absolute top-0 right-0 m-4 bg-blue-500 text-white py-2 px-4 border-2 border-blue-900 rounded-lg hover:bg-blue-700 transition-colors duration-300"
           >
             Copy Code!
           </button>
-          <div className="code bg-black text-white min-h-[80px] h-auto w-[85vw] mx-auto p-[20px]">
+          <div
+            ref={textDivRef}
+            className="code bg-black text-white min-h-[80px] h-auto mx-auto p-[20px] w-full rounded-lg"
+          >
             <p>{`<h1 align="center"> Hello! Myself,  </h1>`}</p>
             <p> {`<h3 align="center"> ${interest} </h3>`} </p>
-            <p>{`<img
+            <p>{`<img 
               src="${
                 banner === ""
-                  ? "https://raw.githubusercontent.com/halfrost/halfrost/master/icons/header_.png"
-                  : { banner }
+                  ? "https://arturssmirnovs.github.io/github-profile-readme-generator/images/banner.png"
+                  : banner
               }"
               alt=""
+              style="width:100%; max-width:600px;"
             />`}</p>
             <p> {`<p align="center"> ${desc} </p>`} </p>
             <p> {`<h3 align="center"> ${college} </h3>`} </p>
@@ -666,34 +672,42 @@ function App() {
             </p>
             <p>
               {" "}
-              {github === "" && linkedin === "" && x === "" && insta === ""
+              {feature1 === false &&
+              feature2 === false &&
+              feature3 === false &&
+              feature4 === false &&
+              feature5 === false
                 ? ""
-                : `<h2 className="" > Connect With Me </h2>`}{" "}
+                : `<p > <h2 align="center" margin> Github Status </h2> </p>`}{" "}
             </p>
             <p>
-              {feature1 === false
-                ? ""
-                : `<a href="https://github.com/ryo-ma/github-profile-trophy">
-                  <img
-                    src="https://github-profile-trophy.vercel.app/?username=${githubUsername}"
-                  />
-                </a>`}
+              {feature1 === false ? (
+                ""
+              ) : (
+                <p>
+                  {feature1 === false
+                    ? ""
+                    : ` <p align="center"> <img src="https://komarev.com/ghpvc/?username=${githubUsername}&label=Profile%20views&color=0e75b6&style=flat" alt="${githubUsername}">  </p>`}
+                </p>
+              )}
             </p>
 
             {feature2 === false
               ? ""
-              : `<a href="https://github.com/ryo-ma/github-profile-trophy">
+              : `<p align="center">
+                <a href="https://github.com/ryo-ma/github-profile-trophy">
             <img
               src="https://github-profile-trophy.vercel.app/?username=${githubUsername}"
             />
-          </a>`}
+          </a>
+              </p>`}
             <br />
             {feature3 === false
               ? " "
-              : `<img src="https://github-readme-streak-stats.herokuapp.com/?user=${githubUsername}" />`}
+              : `<p align="center"> <img src="https://github-readme-streak-stats.herokuapp.com/?user=${githubUsername}" /> </p>`}
             {feature4 === false
               ? " "
-              : `<p>
+              : `<p align="center">
             <img
               src="https://github-readme-stats.vercel.app/api/top-langs?username=${githubUsername}&show_icons=true&locale=en&layout=compact"
             />
@@ -701,7 +715,7 @@ function App() {
             <br />
             {feature5 === false
               ? " "
-              : `<p className="my-[30px]">
+              : `<p className="my-[30px] " align="center">
             <img
               src="https://github-readme-stats.vercel.app/api?username=${githubUsername}&show_icons=true&locale=en"
             />
